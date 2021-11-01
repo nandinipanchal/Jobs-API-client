@@ -1,0 +1,164 @@
+body{
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+}
+
+/*global styles*/
+.clearfix{ zoom: 1;}
+.clearfix ::after{
+    content: " ";
+    clear: both;
+    display: block;
+    height: 0;
+    visibility: hidden;
+}
+
+/*header*/
+ul{
+    list-style-type: none;
+  
+}
+
+li{
+   display: block;
+   float: right;
+    padding: 12px;
+    margin: 15px;
+    background-color: rgb(92, 30, 92);
+    color: white;
+    border-radius: 5px;
+}
+
+.dash{
+    margin:15px;
+    padding: 12px;
+    background-color: rgb(92, 30, 92) ;
+    width:100px;
+    color: white;
+    text-align: center;
+    display: block;
+    float: left;
+    border-radius: 5px;
+}
+
+nav{
+    margin-top: 20px;
+}
+
+/*login and register*/
+.main{
+    width:400px;
+    margin:0 auto;
+    background-color:	#deb887;
+    padding: 20px;
+    border-radius: 5px;
+    text-align: center;
+    box-shadow: 4px 4px 5px black;
+    margin-top: 40px;   
+}
+
+button{
+    height:35px;
+    width: 80px;
+    padding:5px;
+    background-color: rgb(92, 30, 92);
+    border: none;
+    color: white;
+    border-radius: 3px;
+    font-size: 15px;
+    margin: 10px;
+   
+}
+
+#namefield{
+    text-transform: capitalize;
+}
+
+.main input {
+    width:280px;
+    outline: none;
+    border-top-style: hidden;
+    border-right-style: hidden;
+    border-left-style: hidden;
+    border-bottom: 1px solid rgb(92, 30, 92);
+    background-color: inherit;
+    margin-left: 10px;
+    font-size: 20px;
+}
+
+.main p{
+    line-height: 40px;
+} 
+
+::placeholder{
+    font-size: 16px;
+    opacity: 0.5;
+
+}
+
+a{
+    text-decoration: none;
+}
+
+a:hover{
+color: rgb(92, 30, 92);
+font-weight: 600;
+}
+
+button:hover{
+    box-shadow: 4px 4px 4px wheat;
+    cursor: pointer;
+}
+ 
+/*jobs*/
+.jobs-main input {
+    width:280px;
+    outline: none;
+    border-top-style: hidden;
+    border-right-style: hidden;
+    border-left-style: hidden;
+    border-bottom: 1px solid rgb(92, 30, 92);
+    background-color: inherit;
+    margin-left: 10px;
+    font-size: 20px;
+}
+
+.jobs-main{
+    width:400px;
+    margin:0 auto;
+    padding: 20px;
+    border-radius: 5px;
+    text-align: center;
+    box-shadow: 4px 4px 5px black;
+    margin-top: 50px; 
+    background-color: whitesmoke;  
+}
+
+#status{
+    margin-left: -140px;
+}
+
+.jobs-main p{
+    padding: 10px;
+}
+
+select{
+    border: 1px solid black;
+    margin-left: 5px;
+    font-size: 15px;
+    border-radius: 5px;
+    height: 30px;
+}
+
+.jobs-button{
+    width:100px;
+    height: 40px;
+}
+
+.show{
+    border-radius: 5px;
+    text-align: center;
+    box-shadow: 4px 4px 5px black;
+    background-color: whitesmoke; 
+    width:400px;
+
+}
