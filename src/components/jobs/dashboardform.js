@@ -2,8 +2,8 @@ import react, { useState } from 'react'
 
 const Dashboardform = (props) => {
     const [jobstate , setJobState] = useState({
-        cname : "",
-        pname : ""
+        cname : '',
+        pname : ''
     })
 
     const Handlechange = (e)=>{
