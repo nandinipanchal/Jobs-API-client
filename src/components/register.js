@@ -1,56 +1,49 @@
 import react, { useEffect, useState } from 'react'
-import { Link} from "react-router-dom";
+import { Link } from "react-router-dom";
 import '../index.css'
+import axios from 'axios'
+import {setUserSession} from '../common'
 
 const Register = () => {
+    var msg =''
     const [registerstate, setRegisterState] = useState({
-        name : " ",
-        mail : " ",
-        pass : " ",
+        name: '',
+        mail: '',
+        pass: '',
     })
 
-    useEffect (()=>{
-        getRegistered()       
-    },[])
+    const { name, mail, pass } = registerstate
 
-    const {name, mail,pass} = registerstate
-
-    const getRegistered =()=>{
-        fetch('http://localhost:7000/api/v1/user/register',{
-            'method':'POST',
-            'body':JSON.stringify({
-                name : name,
-                email : mail,
-                password : pass
-            })
-        })
-        .then(res => res.json())
-        .then((res) => console.log(res))
-        .catch((error)=> console.log('Cant register user',error))
-    }
-
-    const handleChange = (e) =>{
-        const {name,value }= e.target
-        setRegisterState((prevState)=>{
+    const handleChange = (e) => {
+        const { name, value } = e.target
+        setRegisterState((prevState) => {
             return {
-                ...prevState, [name] :value
+                ...prevState, [name]: value
             }
         })
     }
-   
 
-    const submitBtn = (e)=>{
+
+    const submitBtn = (e) => {
         console.log('clicked')
         e.preventDefault()
-        setRegisterState({...registerstate,error:false})
-        console.log(registerstate)
-        if(name === ' ' || mail === ' ' || pass===' '){
+        setRegisterState({ ...registerstate, error: false })
+        if (name === '' || mail === '' || pass === '') {
             console.log('missing')
+            msg ='Please fill all the credentials'
         }
-        else{
-            getRegistered()
+        else {
+            axios.post('http://localhost:7000/api/v1/user/register',{
+                name : name ,
+                email : mail,
+                password : pass
+            })
+            .then(res=>{
+                console.log('registration successful')
+                msg =' Registration Successful'
+            })
+            .catch(error => console.error(error))
         }
-      
     }
 
     return (
@@ -60,7 +53,8 @@ const Register = () => {
                 <p> <input type="text" className="register-mail" placeholder="Email" name="mail" onChange={handleChange}></input></p>
                 <p> <input type="password" className="register-pass" placeholder="Password" name="pass" onChange={handleChange}></input></p>
                 <button onClick={submitBtn}>Register</button>
-                <p className="result">Already registerd? <Link to ="./login">Login here</Link></p>
+                <p className="result">Already registerd? <Link to="./login">Login here</Link></p>
+                <p className="error">{msg}</p>
             </form>
         </div>
     )

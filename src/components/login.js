@@ -1,56 +1,52 @@
 import react, { useEffect, useState } from 'react'
-import {Link ,useHistory} from 'react-router-dom'
+import { Link, useHistory } from 'react-router-dom'
 import '../index.css'
+import {setUserSession} from '../common'
+import axios from 'axios'
 
 const Login = () => {
-  const [ state ,setState] = useState({
-    mail : " ",
-    pass : " ",
+  const [state, setState] = useState({
+    mail: '',
+    pass: '',
   })
 
-  useEffect(()=>{
-      getLoggedin()
-  },[])
-
-  const getLoggedin =()=>{
-    fetch('http://localhost:7000/api/v1/user/login',{
-      'method':'POST',
-       'body' : JSON.stringify({
-         email : state.mail,
-         password : state.pass
-       })
-    })
-    .then((res)=> res.json())
-    .then((res) => console.log(res))
-    .catch((error)=> console.error(error))
-  }
-
-  const handleChange = (e)=>{
-    const {name, value} = e.target
-    setState((prevState)=>{
-      return{
-        ...prevState, [name] : value
+  const handleChange = (e) => {
+    const { name, value } = e.target
+    setState((prevState) => {
+      return {
+        ...prevState, [name]: value
       }
     })
   }
 
-  const {mail,pass} = state
+  const { mail, pass } = state
 
-  const submitEvent =(e)=>{
+  const submitEvent = (e) => {
     e.preventDefault();
-    setState({...state,error:false})
+    setState({ ...state, error: false })
     console.log(state)
-    if(mail === ' ' || pass=== ' '){
+    if (mail === '' || pass === '') {
       console.log('missing values')
-     
+
     }
-    else{
-      getLoggedin()
+    else {
+      axios.post('http://localhost:7000/api/v1/user/login',{
+        email : mail,
+        password : pass
+      })
+      .then( res=>{
+        setUserSession(res.data.token , res.data.user)
+        console.log('Log in Sucessful')
+        console.log(res.data.token)
+      })
+      .catch(err => {
+        console.error(err)
+      })
     }
-   
+
   }
 
-  
+
   return (
     <div className="main">
       <form className="login-form">
@@ -59,7 +55,7 @@ const Login = () => {
         <button onClick={submitEvent}>Login</button>
         <p className="result">Not registerd? <Link to="./register" >Register here</Link></p>
       </form>
-     
+
     </div>
   )
 }

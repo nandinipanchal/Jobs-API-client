@@ -109,6 +109,10 @@ button:hover{
     cursor: pointer;
 }
  
+.error{
+    color:red;
+}
+
 /*jobs*/
 .jobs-main input {
     width:280px;
@@ -180,3 +184,4 @@ select{
 .jobdiv h3 {
     font-weight: 500;
 }
+
