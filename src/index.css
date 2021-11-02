@@ -162,3 +162,21 @@ select{
     width:400px;
 
 }
+
+/*Home page*/
+.publicheader{
+   width: 100%;
+   margin-left: 1100px;
+}
+
+.jobdiv{
+    width: 200px;
+    box-shadow:3px 3px 4px 1px  rgb(94, 92, 92) ;
+    padding:2px;
+    margin:15px;
+    float: left; 
+}
+
+.jobdiv h3 {
+    font-weight: 500;
+}
