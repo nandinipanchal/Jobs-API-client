@@ -33,14 +33,16 @@ const Dashboardform = (props) => {
                 console.log(res.data.jobs)
                 let job = []
                 job = res.data.jobs
-                job.map((item, index) => {
-                    <p key={1} id={index}></p>
-                    console.log(item.company)
-                    console.log(item.position)
-                    jobstate.cname = item.company
-                    jobstate.pname = item.position
+                job.map((item) => {
+                    
+                    var jobvar ={
+                        cname :'',
+                        pname:''
+                    }
+                    jobvar.cname = item.company
+                    jobvar.pname = item.position
 
-                    props.onAdd(jobstate)
+                    props.onAdd(jobvar)
 
                 })
                 console.log('job list', job)
@@ -50,7 +52,7 @@ const Dashboardform = (props) => {
         showjobs()
     }, [])
 
-    console.log('jobstate', jobstate)
+   
 
     const Handlechange = (e) => {
         const { name, value } = e.target

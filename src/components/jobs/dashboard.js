@@ -9,7 +9,7 @@ const Dashboard = () => {
             return [...prevJobs, NewJob]
         })
     }
-
+    console.log('dashboard component',jobs)
     return (<div>
         <Dashboardform onAdd={addJobs} />
         {jobs.map((jobitem, index) => {

@@ -6,10 +6,7 @@ import Job from './jobs/job'
 import PublicJob from './publicjob'
 
 const Home = () => {
-    const [jobDetail, setJobDetail] = useState({
-        company: '',
-        position: ''
-    })
+   
 
     const [state, setState] = useState([])
 
@@ -18,6 +15,7 @@ const Home = () => {
             return [...prevJobs, NewJob]
         })
     }
+
 
     useEffect(() => {
         axios.get('http://localhost:7000/api/v1')
@@ -30,13 +28,17 @@ const Home = () => {
                 console.log(job)
 
                 job.map((item) => {
-                    console.log(item.company)
-                    console.log(item.position)
+
+                    var jobDetail= {
+                        company:'',
+                        position:''
+                    }
+                    
                     jobDetail.company = item.company
                     jobDetail.position = item.position
-                    setJobDetail(jobDetail)
 
                     addJobs(jobDetail)
+                 
 
                 })
 
