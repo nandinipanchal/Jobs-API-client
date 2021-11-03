@@ -177,11 +177,36 @@ select{
     width: 200px;
     box-shadow:3px 3px 4px 1px  rgb(94, 92, 92) ;
     padding:2px;
-    margin:15px;
+    margin:25px;
     float: left; 
+    border-radius:5px;
 }
 
 .jobdiv h3 {
     font-weight: 500;
+    margin-left:15px;
 }
 
+.jobdiv-main{
+    margin: 50px;
+}
+
+.jobdiv p{
+    width:20%;
+    float:left;
+    font-size:25px;
+    margin-left:15px;
+}
+
+.edit{
+    margin-right:80px;
+}
+
+ion-icon{
+    color:  rgb(92, 30, 92);
+}
+
+/*log out*/
+.logout{
+    cursor:pointer;
+}

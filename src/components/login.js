@@ -10,6 +10,8 @@ const Login = () => {
     pass: '',
   })
 
+  const history = useHistory()
+
   const handleChange = (e) => {
     const { name, value } = e.target
     setState((prevState) => {
@@ -37,7 +39,8 @@ const Login = () => {
       .then( res=>{
         setUserSession(res.data.token , res.data.user)
         console.log('Log in Sucessful')
-        console.log(res.data.token)
+        console.log(res.data.user)
+        history.push('/dashboard')
       })
       .catch(err => {
         console.error(err)

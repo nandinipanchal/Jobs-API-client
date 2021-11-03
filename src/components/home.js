@@ -58,7 +58,8 @@ const Home = () => {
                     <PublicJob
                         company={item.company}
                         position={item.position}
-                    />)
+                    />
+                    )
             })
         }
 
