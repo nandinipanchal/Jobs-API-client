@@ -27,7 +27,8 @@ const Dashboardform = (props) => {
     )
 
     useEffect(() => {
-        axios.get('http://localhost:7000/api/v1/job')
+        const showjobs = () =>{
+            axios.get('http://localhost:7000/api/v1/job')
             .then(res => {
                 console.log(res.data.jobs)
                 let job = []
@@ -45,6 +46,8 @@ const Dashboardform = (props) => {
                 console.log('job list', job)
             })
             .catch(error => console.log(error))
+        }
+        showjobs()
     }, [])
 
     console.log('jobstate', jobstate)
@@ -115,6 +118,8 @@ const Dashboardform = (props) => {
                             <option>Declined</option>
                             <option>Pending</option>
                         </select></p>
+                        {/* <p>Private<input type="checkbox" value="private"></input></p>
+                        <p>Public<input type="checkbox" value="public"></input></p> */}
                         <button className="jobs-button" onClick={Handlesubmit}>Create Job</button>
                     </form>
                 </div>
@@ -125,4 +130,6 @@ const Dashboardform = (props) => {
 }
 
 export default Dashboardform
+
+
 

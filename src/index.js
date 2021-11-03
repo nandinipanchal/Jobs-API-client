@@ -5,6 +5,7 @@ import Home from './components/home'
 import Login from './components/login'
 import Register from './components/register' 
 import Dashboard from './components/jobs/dashboard'
+import Editjob from './components/editjob'
 
 ReactDOM.render(
   <React.StrictMode>
@@ -14,6 +15,7 @@ ReactDOM.render(
       <Route path="/login" component={Login}></Route>
       <Route path="/register" component={Register}></Route>
       <Route path="/dashboard" component={Dashboard}></Route>
+      <Route path="/editjob" component={Editjob}></Route>
       </Switch>
     </Router>
   </React.StrictMode>,
