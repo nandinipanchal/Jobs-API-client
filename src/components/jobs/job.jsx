@@ -23,10 +23,13 @@ const Job =(props)=>{
     }
 
     const HandleDelete = () =>{
-        
-        // axios.delete(`http://localhost:7000/api/v1/jobs/${id}`)
-        // .then(console.log('deleted'))
-        // .catch(err=> console.log(err))
+        const id = props.jobId
+        axios.delete(`http://localhost:7000/api/v1/job/${id}`)
+        .then(() => {
+            console.log('deleted')
+            window.location.reload(false)
+        })
+        .catch(err=> console.log(err))
 
     }
 

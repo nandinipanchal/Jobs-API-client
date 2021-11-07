@@ -10,6 +10,7 @@ const Dashboard = () => {
         })
     }
     console.log('dashboard component',jobs)
+ 
     return (<div>
         <Dashboardform onAdd={addJobs} />
         {jobs.map((jobitem, index) => {
@@ -19,6 +20,8 @@ const Dashboard = () => {
                     id={index}
                     company={jobitem.cname}
                     position={jobitem.pname}
+                    jobId ={jobitem.jobId}
+                   
 
                 />
             )

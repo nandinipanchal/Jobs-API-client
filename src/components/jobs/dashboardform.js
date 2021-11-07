@@ -27,31 +27,34 @@ const Dashboardform = (props) => {
     )
 
     useEffect(() => {
-        const showjobs = () =>{
-            axios.get('http://localhost:7000/api/v1/job')
-            .then(res => {
-                console.log(res.data.jobs)
-                let job = []
-                job = res.data.jobs
-                job.map((item) => {
-                    
-                    var jobvar ={
-                        cname :'',
-                        pname:''
-                    }
-                    jobvar.cname = item.company
-                    jobvar.pname = item.position
-
-                    props.onAdd(jobvar)
-
-                })
-                console.log('job list', job)
-            })
-            .catch(error => console.log(error))
-        }
-        showjobs()
+        showjobs() 
     }, [])
 
+    const showjobs = () =>{
+        axios.get('http://localhost:7000/api/v1/job')
+        .then(res => {
+            console.log(res.data.jobs)
+            let job = []
+            job = res.data.jobs
+            job.map((item) => {
+                
+                var jobvar ={
+                    cname :'',
+                    pname :'',
+                    jobId :''
+                }
+                jobvar.cname = item.company
+                jobvar.pname = item.position
+                jobvar.jobId = item._id
+
+                props.onAdd(jobvar)
+
+            })
+            console.log('job list', job)
+      
+        })
+        .catch(error => console.log(error))
+    }
    
 
     const Handlechange = (e) => {
@@ -76,6 +79,7 @@ const Dashboardform = (props) => {
             })
                 .then(res => {
                     console.log('success')
+                    showjobs()
                 })
                 .catch(err => console.log(err))
             props.onAdd(jobstate)
