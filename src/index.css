@@ -31,7 +31,7 @@ li{
 .dash{
     margin:15px;
     padding: 12px;
-    background-color: rgb(92, 30, 92) ;
+
     width:100px;
     color: white;
     text-align: center;
@@ -39,11 +39,36 @@ li{
     float: left;
     border-radius: 5px;
 }
-
+.dash{
+    width: 70%;
+    display: flex;
+}
+.search{
+    width: 400px;
+    padding: 13px;
+    outline: none;
+    border: 1px solid rgb(92, 30, 92);
+    border-radius: 5px;
+  
+}
 nav{
     margin-top: 20px;
 }
 
+.dash input[type=number]{
+    width: 40px;
+    height: 40px;
+    outline: none;
+    border-radius: 5px;
+    border:1px solid rgb(92, 30, 92);
+}
+
+.filter{
+    color:black;
+    margin-left:20px;
+    margin-right: 20px;
+    margin-top:5px;
+}
 /*login and register*/
 .main{
     width:400px;
@@ -224,4 +249,26 @@ ion-icon{
 input[type=checkbox]{
     display: block;
     margin-top: -11px;
+}
+
+/*pagination div*/
+.paginationbtns{
+   width:60%; 
+   margin-left: 300px; 
+  display: flex;
+  margin-top: 400px;
+  font-size: 15px;
+   
+}
+
+.paginationbtns a{
+    cursor: pointer;
+}
+
+.paginationbtns a:hover{
+    color:white;   
+}
+
+.active{
+    background-color: rgb(63, 60, 60);
 }

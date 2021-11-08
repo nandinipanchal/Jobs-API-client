@@ -127,7 +127,11 @@ const Dashboardform = (props) => {
             <header>
                 <div className="main-nav clearfix">
                     <nav>
-                        <div class="dash">Dashboard</div>
+                        <div className="dash"><input type="text" className="search" placeholder="Search by company or position"></input>
+                        <label className="filter">Jobs per page?</label>
+                        <input type="number"></input>
+                        </div>
+                        
                         <ul>
                             <li className="logout" onClick={HandlelogOut}>Log Out</li>
                             <li>Hello, {user.name}</li>

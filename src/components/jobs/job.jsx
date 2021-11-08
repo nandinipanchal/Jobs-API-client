@@ -2,9 +2,12 @@ import '../../index.css'
 import { useHistory } from 'react-router-dom'
 import axios from 'axios'
 import { getToken } from '../../common'
+import { useState } from 'react'
 
 
 const Job = (props) => {
+
+
     const history = useHistory()
 
     const token = getToken()
@@ -43,8 +46,7 @@ const Job = (props) => {
         <div className="jobdiv">
             <h3>Company : {props.company}</h3>
             <h3>Position : {props.position}</h3>
-            <h3>Status : {props.status}</h3>
-          
+            <h3>Status : {props.status}</h3> 
             <p className="edit"><a onClick={HandleEdit}><ion-icon name="create"></ion-icon></a></p>
             <p><a onClick={HandleDelete}><ion-icon name="trash"></ion-icon></a></p>
         </div>
