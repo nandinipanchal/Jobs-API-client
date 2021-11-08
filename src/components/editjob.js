@@ -1,5 +1,6 @@
 
-const Editjob = () => {
+const Editjob = (props) => {
+    console.log(props.editId)
     return (<div className="jobs-main">
         <form className="job-form">
             <p><input className="company" type="text" name="cname" placeholder="Company Name " ></input></p>

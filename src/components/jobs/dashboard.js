@@ -21,6 +21,8 @@ const Dashboard = () => {
                     company={jobitem.cname}
                     position={jobitem.pname}
                     jobId ={jobitem.jobId}
+                    status ={jobitem.jobStatus}
+                 
                    
 
                 />

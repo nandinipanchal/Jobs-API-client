@@ -212,3 +212,16 @@ ion-icon{
 .logout{
     cursor:pointer;
 }
+
+
+/*checkbox and select*/
+#check{
+    width: 50%;
+    margin-left:-25px;
+
+}
+
+input[type=checkbox]{
+    display: block;
+    margin-top: -11px;
+}

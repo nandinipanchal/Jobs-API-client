@@ -3,12 +3,15 @@ import { getUser, getToken , removeUserSession} from '../../common'
 import axios from 'axios'
 import { useHistory } from 'react-router-dom'
 
-
 const Dashboardform = (props) => {
     const [jobstate, setJobState] = useState({
         cname: '',
         pname: ''
     })
+
+    const [checkbox , setCheckbox] = useState('private')
+
+    const [selectVal , setSelectVal] = useState('')
 
     const user = getUser()
     const token = getToken()
@@ -41,11 +44,15 @@ const Dashboardform = (props) => {
                 var jobvar ={
                     cname :'',
                     pname :'',
-                    jobId :''
+                    jobId :'',
+                    jobStatus:'',
+                    
                 }
                 jobvar.cname = item.company
                 jobvar.pname = item.position
                 jobvar.jobId = item._id
+                jobvar.jobStatus = item.status
+              
 
                 props.onAdd(jobvar)
 
@@ -100,6 +107,21 @@ const Dashboardform = (props) => {
 
     }
 
+    const HandleClick = (e) =>{
+        console.log('test 1')
+        let val = e.target.value
+        console.log(val)
+        setCheckbox(val)
+        console.log('checkbox state :',checkbox)
+        
+    }
+
+    const HandleSelect =(e) =>{
+        let val = e.target.value
+        console.log(val)
+        setSelectVal(val)
+        console.log('select state :',selectVal)
+    }
     return (
         <div>
             <header>
@@ -119,14 +141,14 @@ const Dashboardform = (props) => {
                     <form className="job-form">
                         <p><input className="company" type="text" name="cname" placeholder="Company Name " onChange={Handlechange}></input></p>
                         <p><input className="position" type="text" name="pname" placeholder="Position" onChange={Handlechange}></input></p>
-                        <p id="status">Status :<select className="status">
-                            <option>Interview</option>
-                            <option>Declined</option>
-                            <option>Pending</option>
+                        <p id="status">Status :<select className="status" onChange={HandleSelect}>
+                            <option value="interview" selected>Interview</option>
+                            <option value="declined">Declined</option>
+                            <option value="pending">Pending</option>
                         </select></p>
-                        {/* <p>Private<input type="checkbox" value="private"></input></p>
-                        <p>Public<input type="checkbox" value="public"></input></p> */}
-                        <button className="jobs-button" onClick={Handlesubmit}>Create Job</button>
+                        <p id="check">Private<input type="checkbox" value="private" onClick={HandleClick}></input>
+                        Public<input type="checkbox" value="public"  onClick={HandleClick}></input></p>
+                        <button className="jobs-button"  onClick={Handlesubmit}>Create Job</button>
                     </form>
                 </div>
             </section>
