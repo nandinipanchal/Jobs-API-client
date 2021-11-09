@@ -14,6 +14,8 @@ const Dashboardform = (props) => {
 
     const [selectVal , setSelectVal] = useState('')
 
+    const [limit , setLimit] = useState('')
+
     const user = getUser()
     const token = getToken()
     console.log(user, token)
@@ -29,37 +31,40 @@ const Dashboardform = (props) => {
             return Promise.reject(error)
         }
     )
-
+    
+   
     useEffect(() => {
         showjobs() 
-    }, [])
+    },[])
 
+
+    console.log('outside showjobs function',limit)
     const showjobs = () =>{
-        axios.get('http://localhost:7000/api/v1/job')
+        let joblimit = 4
+        console.log('inside showjobs function',limit)
+        axios.get(`http://localhost:7000/api/v1/job?page=1&limit=${joblimit}`)
         .then(res => {
-            console.log(res.data.jobs)
-            let job = []
-            job = res.data.jobs
+           console.log(res.data.results.results)
+           let job = []
+            job = res.data.results.results
             job.map((item) => {
-                
-                var jobvar ={
-                    cname :'',
-                    pname :'',
-                    jobId :'',
-                    jobStatus:'',
-                    
+
+                var jobvar = {
+                    cname: '',
+                    pname: '',
+                    jobId: '',
+                    jobStatus: '',
+
                 }
                 jobvar.cname = item.company
                 jobvar.pname = item.position
                 jobvar.jobId = item._id
                 jobvar.jobStatus = item.status
-              
+
 
                 props.onAdd(jobvar)
 
             })
-            console.log('job list', job)
-      
         })
         .catch(error => console.log(error))
     }
@@ -138,6 +143,16 @@ const Dashboardform = (props) => {
         setSelectVal(val)
         console.log('select state :',selectVal)
     }
+
+    const HandlejobLimitchange = (e) =>{
+        console.log(e.target.value)
+        let val = e.target.value
+        setLimit(val)
+
+       
+    }
+   
+    
     return (
         <div>
             <header>
@@ -146,8 +161,7 @@ const Dashboardform = (props) => {
                         <div className="dash">
                         <input type="text" className="search" name="searchkey" onChange={Handlechange} placeholder="Search by company or position"></input>
                         <ion-icon name="search" className="sicon" size="large" onClick={HandleSearch}></ion-icon>
-                        {/* <label className="filter">Jobs per page?</label>
-                        <input type="number"></input> */}
+                        <label className="showlabel">Show</label><input type="number" className="limit" min="1" name="joblimit" onChange={HandlejobLimitchange}></input><label className="joblabel">Jobs</label>
                         </div>
                         
                         <ul>
@@ -173,6 +187,9 @@ const Dashboardform = (props) => {
                         <button className="jobs-button"  onClick={Handlesubmit}>Create Job</button>
                     </form>
                 </div>
+            </section>
+            <section>
+               
             </section>
             
         </div>
