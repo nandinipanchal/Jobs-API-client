@@ -254,7 +254,7 @@ input[type=checkbox]{
 /*pagination div*/
 .paginationbtns{
    width:60%; 
-   margin-left: 300px; 
+   margin-left: 400px; 
   display: flex;
   margin-top: 400px;
   font-size: 15px;
@@ -272,3 +272,4 @@ input[type=checkbox]{
 .active{
     background-color: rgb(63, 60, 60);
 }
+

@@ -1,4 +1,4 @@
-import react, { useState } from 'react'
+ import react, { useState } from 'react'
 import Dashboardform from './dashboardform'
 import Job from './job'
 import ReactPaginate from 'react-paginate'
@@ -7,13 +7,11 @@ const Dashboard = () => {
     const [jobs, setJobs] = useState([])
     const [pageNumber, setPageNUmber] = useState(0)
 
-
     const addJobs = (NewJob) => {
         setJobs((prevJobs) => {
             return [...prevJobs, NewJob]
         })
     }
-
 
     const jobperpage = 4
     const pagesVisited = pageNumber * jobperpage

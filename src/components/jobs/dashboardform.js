@@ -6,7 +6,8 @@ import { useHistory } from 'react-router-dom'
 const Dashboardform = (props) => {
     const [jobstate, setJobState] = useState({
         cname: '',
-        pname: ''
+        pname: '',
+        searchkey: ''
     })
 
     const [checkbox , setCheckbox] = useState('private')
@@ -71,9 +72,24 @@ const Dashboardform = (props) => {
                 ...prevJobState, [name]: value
             }
         })
+    
     }
 
-    const { cname, pname } = jobstate
+    const { cname, pname , searchkey} = jobstate
+
+
+    const HandleSearch = () =>{
+        console.log(searchkey)
+        let keyword = searchkey
+        axios.get(`http://localhost:7000/api/v1/job/search/${keyword}`)
+        .then( (res)=>{
+            console.log('search success')
+            console.log(res.data)
+        })
+        .catch((err)=>{
+            console.error(err)
+        })
+    }
 
     const Handlesubmit = (e) => {
         if (cname === '' || pname === '') {
@@ -127,9 +143,11 @@ const Dashboardform = (props) => {
             <header>
                 <div className="main-nav clearfix">
                     <nav>
-                        <div className="dash"><input type="text" className="search" placeholder="Search by company or position"></input>
-                        <label className="filter">Jobs per page?</label>
-                        <input type="number"></input>
+                        <div className="dash">
+                        <input type="text" className="search" name="searchkey" onChange={Handlechange} placeholder="Search by company or position"></input>
+                        <ion-icon name="search" className="sicon" size="large" onClick={HandleSearch}></ion-icon>
+                        {/* <label className="filter">Jobs per page?</label>
+                        <input type="number"></input> */}
                         </div>
                         
                         <ul>

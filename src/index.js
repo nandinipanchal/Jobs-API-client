@@ -11,6 +11,7 @@ ReactDOM.render(
   <React.StrictMode>
     <Router>
       <Switch>
+      
       <Route path="/home" component={Home}></Route>
       <Route path="/login" component={Login}></Route>
       <Route path="/register" component={Register}></Route>
