@@ -4,7 +4,7 @@ import { Route, BrowserRouter as Router, Switch } from "react-router-dom";
 import Home from './components/home'
 import Login from './components/login'
 import Register from './components/register' 
-import Dashboard from './components/jobs/dashboard'
+import Dashboardform from './components/jobs/dashboardform';
 import Editjob from './components/editjob'
 
 ReactDOM.render(
@@ -15,7 +15,7 @@ ReactDOM.render(
       <Route path="/home" component={Home}></Route>
       <Route path="/login" component={Login}></Route>
       <Route path="/register" component={Register}></Route>
-      <Route path="/dashboard" component={Dashboard}></Route>
+      <Route path="/dashboard" component={Dashboardform}></Route>
       <Route path="/editjob" component={Editjob}></Route>
       </Switch>
     </Router>

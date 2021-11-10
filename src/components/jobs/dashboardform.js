@@ -1,7 +1,8 @@
-import { useState, useEffect } from 'react'
+import {useRef ,useState, useEffect } from 'react'
 import { getUser, getToken , removeUserSession} from '../../common'
 import axios from 'axios'
 import { useHistory } from 'react-router-dom'
+import Job from './job'
 
 const Dashboardform = (props) => {
     const [jobstate, setJobState] = useState({
@@ -14,7 +15,21 @@ const Dashboardform = (props) => {
 
     const [selectVal , setSelectVal] = useState('')
 
-    const [limit , setLimit] = useState('')
+    const [pageNumber ,setPageNumber] = useState(1)
+
+    const [limit ,setLimit] = useState(4)
+
+    const [total ,setTotal] = useState(0)
+    
+    const [jobs, setJobs] = useState([])
+
+    const addJobs = (NewJob) => {
+        setJobs((prevJobs) => {
+            return [...prevJobs, NewJob]
+        })
+    }
+   
+  
 
     const user = getUser()
     const token = getToken()
@@ -32,21 +47,24 @@ const Dashboardform = (props) => {
         }
     )
     
-   
+
     useEffect(() => {
-        showjobs() 
-    },[])
-
-
-    console.log('outside showjobs function',limit)
+        showjobs()   
+    },[pageNumber])
+   
     const showjobs = () =>{
-        let joblimit = 4
-        console.log('inside showjobs function',limit)
-        axios.get(`http://localhost:7000/api/v1/job?page=1&limit=${joblimit}`)
+        let joblimit = limit
+        let page = pageNumber
+        console.log('page',page)
+        console.log('inside showjobs function',joblimit)
+        axios.get(`http://localhost:7000/api/v1/job?page=${page}&limit=${joblimit}`)
         .then(res => {
-           console.log(res.data.results.results)
+           console.log('server',res.data.results)
            let job = []
             job = res.data.results.results
+            let totaljobs = res.data.total
+            setTotal(totaljobs)
+            console.log('server jobs',totaljobs)
             job.map((item) => {
 
                 var jobvar = {
@@ -54,15 +72,18 @@ const Dashboardform = (props) => {
                     pname: '',
                     jobId: '',
                     jobStatus: '',
+                  
 
                 }
                 jobvar.cname = item.company
                 jobvar.pname = item.position
                 jobvar.jobId = item._id
                 jobvar.jobStatus = item.status
+                
+                addJobs(jobvar)
 
-
-                props.onAdd(jobvar)
+                // props.onAdd(jobvar)
+              
 
             })
         })
@@ -107,10 +128,10 @@ const Dashboardform = (props) => {
             })
                 .then(res => {
                     console.log('success')
-                    showjobs()
+                   
                 })
                 .catch(err => console.log(err))
-            props.onAdd(jobstate)
+            addJobs(jobstate)
             setJobState({
                 cname: '',
                 pname: ''
@@ -145,14 +166,20 @@ const Dashboardform = (props) => {
     }
 
     const HandlejobLimitchange = (e) =>{
-        console.log(e.target.value)
+        // console.log(e.target.value)
         let val = e.target.value
-        setLimit(val)
-
-       
+        setLimit(val) 
     }
    
-    
+    const HandlePagination = () =>{
+        console.log('inside handlepagination',limit)
+        showjobs()
+    }
+
+    console.log('total state',total)
+    const totalpages = Math.ceil(total/limit)
+    const pages = new Array(4).fill(null).map((v,i) => i)
+    console.log('page array',pages)
     return (
         <div>
             <header>
@@ -161,7 +188,8 @@ const Dashboardform = (props) => {
                         <div className="dash">
                         <input type="text" className="search" name="searchkey" onChange={Handlechange} placeholder="Search by company or position"></input>
                         <ion-icon name="search" className="sicon" size="large" onClick={HandleSearch}></ion-icon>
-                        <label className="showlabel">Show</label><input type="number" className="limit" min="1" name="joblimit" onChange={HandlejobLimitchange}></input><label className="joblabel">Jobs</label>
+                        <label className="showlabel">Show</label><input type="number" className="limit" min="4" name="joblimit" onChange={HandlejobLimitchange}></input><label className="joblabel">Jobs</label>
+                        <label className="gobtn" onClick={HandlePagination}><a>Go</a></label>
                         </div>
                         
                         <ul>
@@ -189,7 +217,34 @@ const Dashboardform = (props) => {
                 </div>
             </section>
             <section>
-               
+               {
+                   jobs.map((jobitem, index) => {
+                    return (
+                        <Job
+                            key={1}
+                            id={index}
+                            company={jobitem.cname}
+                            position={jobitem.pname}
+                            jobId={jobitem.jobId}
+                            status={jobitem.jobStatus}
+                        />
+                    )
+                })
+               }
+               <div className="paginate">
+               <button>Prev</button>
+               {
+                  
+                   pages.map((pageIndex) =>{
+                       return(
+                            <button className="paginationsbtns" key={pageIndex} onClick={ () => setPageNumber(pageIndex)}>{pageIndex+1}</button>
+                        )
+                      
+                   })
+                   
+               }
+               <button>Next</button>
+               </div>
             </section>
             
         </div>

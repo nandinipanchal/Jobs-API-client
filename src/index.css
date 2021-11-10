@@ -70,6 +70,16 @@ nav{
     margin-right: 20px;
     margin-top:5px;
 }
+
+.gobtn{
+    margin-left:20px;
+    margin-right: 20px;
+    margin-top:8px;
+    background-color: gray;
+    padding: 10px;
+    height: 20px;
+    border-radius: 50%;
+}
 /*login and register*/
 .main{
     width:400px;
@@ -272,4 +282,24 @@ label{
 
 .joblabel{
     margin-top: 13px;
+}
+
+/*pagination*/
+.paginationsbtns{
+  display: flex;
+  width: 30px;
+}
+
+.paginate{
+    width: 50%;
+    display: flex;
+    margin-left: 450px;
+}
+
+.nextlink:hover , .previouslink:hover {
+    color : white;
+}
+
+.active{
+   background-color: gray;
 }
